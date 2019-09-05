@@ -1,0 +1,104 @@
+ \documentclass[conference]{IEEEtran}
+\IEEEoverridecommandlockouts
+
+\usepackage{cite}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{algorithmic}
+\usepackage{graphicx}
+\usepackage{textcomp}
+\usepackage{xcolor}
+\usepackage{graphics} % for pdf, bitmapped graphics files
+\usepackage{epsfig} % for postscript graphics files
+\usepackage{mathptmx} 
+\usepackage{amsmath} % assumes amsmath package installed
+\usepackage{amssymb}  % assumes amsmath package installed
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel} 
+\usepackage{url}
+\usepackage{hyperref}
+\usepackage{graphicx}
+\usepackage{color}
+\usepackage{colortbl}
+\usepackage{epstopdf}
+\usepackage{filecontents}
+\usepackage{comment}
+\usepackage{amssymb}
+\usepackage{verbatim}
+\usepackage{indentfirst}
+\usepackage{array}
+\everymath{\displaystyle}
+\usepackage{url}
+\usepackage{enumitem} %For lists
+\usepackage{array,tabularx}
+\usepackage{textcomp}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{ifthen}
+\usepackage{amsmath}
+\usepackage{comment}
+\usepackage{booktabs}
+\usepackage{graphicx}
+\usepackage[nolist]{acronym}
+
+\def\oh{\tfrac{1}{2}}
+
+\newcommand{\mat}[1]{\mathbf{#1}}
+\def\H{^{\mathrm{H}}}
+\def\T{^{\mathrm{T}}}
+
+\usepackage[caption=false,font=footnotesize]{subfig}
+
+\usepackage{tikz}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.10}
+
+\usetikzlibrary{arrows,calc,positioning}
+
+\def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
+    T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
+\begin{document}
+
+\title{Coexisting Analysis of 5G Networks with ISDB-T System in TV White Spaces
+%\title{Análise do Acesso Oportunista ao Espectro nas Faixas de UHF para Futuras Redes de Comunicações Móveis - 5G
+%\title{Uma Análise de Coexistência entre Sistema ISDB-T de Radiodifusão e Futuras Redes de Comunicações Móveis - 5G
+{\footnotesize \textsuperscript{}}
+\thanks{}
+}
+%
+\author{\IEEEauthorblockN{\textcolor{black}{Samuel de Souza Lima Moreira}}
+\IEEEauthorblockA{\textcolor{black}{Francisco Martins Portelinha Júnior.}} 
+\IEEEauthorblockN{\textcolor{black}{R\^omulo Mota Volpato}}
+\IEEEauthorblockN{\textcolor{black}{Instituto Nacional de Telecomunicações - INATEL}}
+\and
+\IEEEauthorblockN{\textcolor{black}{Tales Cleber Pimenta}}
+\IEEEauthorblockA{\textcolor{black}{Universidade Federal de Itajubá - UNIFEI}
+}
+}
+\maketitle
+
+\renewcommand\IEEEkeywordsname{Keywords}
+\begin{IEEEkeywords}
+ISDB-T, radiodifusão, 5G, GFDM, F-OFDM
+\end{IEEEkeywords}
+
+\pagenumbering{arabic} 
+%//===========================================
+%/ 01 Abstract:
+\input{Sections/01_Abstract.tex}
+%/ 02 Introduction:
+\input{Sections/02_Introduction.tex}
+%/ 03 Waveforms:
+\input{Sections/03_WaveForms.tex}
+%/ 04 System Setup:
+\input{Sections/04_SystemSetup.tex}
+%/ 05 Test Procedures:
+\input{Sections/05_TestProcedures.tex}
+%/ 06 Results:
+\input{Sections/06_Results.tex}
+%/ 07 Conclusion: 
+\input{Sections/07_Conclusions.tex}
+%//========================================== 
+\bibliographystyle{IEEEtran}
+\bibliography{references}
+
+\end{document}

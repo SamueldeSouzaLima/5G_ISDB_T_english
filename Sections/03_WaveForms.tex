@@ -1,0 +1,74 @@
+\section{Waveforms} \label{sec:wave}
+%=====================================================
+
+O OFDM têm sido empregado como a interface padrão para a quarta geração celular e o atual padrão de transmissão terrestre \cite{ref_OFDM}. Contudo, o seu uso na camada física dificulta o acesso dinâmico ao espectro, devido à sua alta emissão de espúrios fora da faixa de interesse, o que torna necessário o uso de filtros para atender às normas impostas pelos órgãos de regulamentação. Portanto, para que o uso fragmentado do espectro possa ser eventualmente viável, o rádio transmissor deve reduzir as emissões fora da faixa minimizando as interferências nos canais adjacentes.\par
+%======================================================
+Os sistemas de comunicação atuais foram projetados para atingir a máxima capacidade de transmissão de dados possível, diferentemente dos requisitos almejados pela próxima geração de comunicação móvel. O 5G engloba diversos cenários, com características conflitantes, tornando um conceito mais amplo e complexo \cite{ref_pekka} e com a necessidade de uma maior flexibilidade na padronização de sua forma de onda. \par
+%=======================================================
+
+\subsection{GFDM}
+
+A forma de onda GFDM pode ser descrita por sua flexibilidade em frequência e tempo, organizada em  $K$ sub-portadoras em frequência e $M$ sub-símbolos subsequentes no tempo, resultando em $N = KM$ versões diferentes de um pulso protótipo $g [n]$, cada um deslocado circularmente, tanto no domínio do tempo como no domínio da frequência, e modulado pelo símbolo de dados correspondente \cite{gfdm}, dado por \par
+
+%=======================================================
+\begin{equation}\label{eq:xn}
+x[n] = \sum_{k=0}^{K-1}\sum_{m=0}^{M-1}d_{k,m}g\left[\left<n-mK\right>_N\right]{e}^{j2\pi\frac{k}{K}n},
+\end{equation}
+\nonident onde $d_{k,m}$ é o símbolo de dados carregado pela $k$-iésima sub-portadorea no $m$-ésimo sub-simbolo, $g[n]$ é o pulso protótipo, $\left<\cdot\right>_N$ é o operador modulo $N$ de $n=0,1,\ldots,N-1$. \par
+
+%=======================================================
+No receptor, admitindo que haja perfeita sincronia, e removido o prefixo cíclico (PC), o  sinal será equalizado no domínio da frequência, e pode então ser demodulado como \par
+
+\begin{equation}
+    \label{eq:dhat}
+	\hat{d}=  \mathbf{B}_\textrm{ZF}\mathbf{y}_{\text{eq}}\\
+\end{equation}
+\noindent onde $\mathbf{y}_{\text{eq}}$ é o sinal recebido e equalizado e $\mathbf{B}_\textrm{ZF}$ é o processo de demodulação pela técnica \textit{zero-forcing} (ZF). \par
+
+%======================================================
+
+\subsubsection{W-GFDM}
+%======================================================
+
+O GFDM Janelado (W-GFDM) é uma variação que emprega uma janela no tempo para suavizar as transições entre os blocos GFDM. Nesta técnica o prefixo cíclico, com comprimento $NPC = NCH + NW$, onde onde NCH é o número de amostras da resposta ao impulso do canal e NW o tamanho da janela de transição, e o sufixo cíclico (CS) com $NCS = NW$, são utilizado somente uma vez por bloco.\par
+
+%=======================================================
+\subsection{F-OFDM}
+
+A técnica f-OFDM vem sendo desenvolvida com a promessa de ser uma solução simples para o problema de emissão fora da faixa do OFDM. Neste esquema, dados destinados a cada usuário são tratados de maneira independente, correspondendo ao sinal que será transmitido em cada uma das $L$ sub-bandas. Para o sinal de cada sub-banda, os \textit{bits} são mapeados em símbolos de dado e agrupados em $K_{l}$ símbolos, em que $K$ é o número de subportadoras da $l$-ésima sub-banda, sobre os quais será computada cada uma das $L$ IFFT. É, então, adicionado um PC de tamanho $N_{\text{PC}_{l}}$ e o sinal resultante é filtrado, por sub-banda, por um filtro $g_{l}[n]$. \par
+%=======================================================
+
+Em \cite{fOFDM_hwawei} é proposto um sistema f-OFDM em que o transmissor gera seu sinal OFDM empregando um grupo de $K_{l}$ subportadoras consecutivas ao longo de $M$ símbolos OFDM consecutivos. O sinal transmitido por cada terminal móvel é dado por \par
+
+%==================================================
+\begin{equation}
+x_{\text{f}}[n] = \sum_{m = 0}^{M-1}x_{m}(n - m(K_{l} + N_{\text{PC}_{l}}))
+\end{equation}
+%==================================================
+em que
+%==================================================
+\begin{equation}
+x_{m}[n] = \sum_{k = k^{'}}^{k^{'} + K_{l} - 1}d_{m,k}\exp\bigg(j2\pi \frac{k}{K_{l}}n\bigg)
+\hspace{0.2cm}\textrm{para}\hspace{0.5cm} -N_{\text{PC}_{l}} \leq n \leq N.
+\end{equation}
+%==================================================
+
+O sinal f-OFDM é então obtido através da filtragem do sinal $x_{f}[n]$ através filtro protótipo apropriado $g_{l}[n]$, que pode ser descrito pelo processo de convolução, desta maneira teremos, \par
+%==================================================
+
+\begin{equation}
+\centering
+\bar{x}_{\text{f}}[n] = x_{\text{f}}[n] * g_{l}[n]
+\end{equation}
+
+%=======================================================
+\nonident onde $\bar{x_{\text{f}}[n]}$ é o sinal da $l$-ésima sub-banda. O dimensionamento do filtro protótipo tem de ser apropriado para mitigar as emissões fora da faixa. No receptor na entrada da estação rádio base, o sinal recebido dos sinal dos $u$-ésimos usuários é dado por \cite{fOFDM_hwawei}, \par
+% Veja se concorda com essa frase e se ficou boa!!!
+
+%=======================================================
+\begin{equation} \label{eq:received}
+y[n] = \sum_{u = 0}^{U} \bar{x}_{\text{u}}[n] * h_{u}[n] + w[n]
+\end{equation}
+
+%=======================================================
+onde $U$ é o número de terminais móveis, $\bar{x}_{\text{u}}[n]$ é o sinal do $u$-ésimo usuário, $h_{u}[n]$ é a resposta impulsiva do canal do $u$-ésimo canal e $w[n]$ é ruído aditivo gaussiano branco (AWGN). Após a recepção, o sinal é passado primeiramente por um filtro casado $g_{l}[n]^*$, haverá a remoção do prefixo cíclico, transformação do sinal do domínio do tempo para frequência, equalização e por fim a demodulação dos mesmos. \par
